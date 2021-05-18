@@ -14,6 +14,8 @@ class Window {
 
 	public var width(get, never) : Int;
 	public var height(get, never) : Int;
+	public var devicePixelRatio(get, never) : Float;
+
 	public var mouseX(get, never) : Int;
 	public var mouseY(get, never) : Int;
 	public var mouseLock(get, set) : Bool;
@@ -109,6 +111,10 @@ class Window {
 	function set_vsync( b : Bool ) : Bool {
 		if( !b ) throw "Can't disable vsync on this platform";
 		return true;
+	}
+
+	function get_devicePixelRatio() : Float {
+		return 1.0;
 	}
 
 	function get_isFocused() : Bool return true;

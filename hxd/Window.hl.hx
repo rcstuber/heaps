@@ -26,6 +26,8 @@ class Window {
 
 	public var width(get, never) : Int;
 	public var height(get, never) : Int;
+	public var devicePixelRatio(get, never) : Float;
+
 	public var mouseX(get, never) : Int;
 	public var mouseY(get, never) : Int;
 	public var mouseLock(get, set) : Bool;
@@ -53,7 +55,7 @@ class Window {
 	#end
 	#end
 
-	function new(title:String, width:Int, height:Int, fixed:Bool = false) {
+	function new(title:String, width:Int, height:Int, fixed:Bool = false, hdpi:Bool = false) {
 		this.windowWidth = width;
 		this.windowHeight = height;
 		eventTargets = new List();
@@ -63,6 +65,9 @@ class Window {
 		#if heaps_vulkan
 		if( USE_VULKAN ) sdlFlags |= sdl.Window.SDL_WINDOW_VULKAN;
 		#end
+		if(hdpi) {
+			sdlFlags |= sdl.Window.SDL_WINDOW_ALLOW_HIGHDPI;
+		}
 		window = new sdl.Window(title, width, height, sdl.Window.SDL_WINDOWPOS_CENTERED, sdl.Window.SDL_WINDOWPOS_CENTERED, sdlFlags);
 		#elseif hldx
 		final dxFlags = if (!fixed) dx.Window.RESIZABLE else 0;
@@ -138,6 +143,10 @@ class Window {
 
 	function get_height() : Int {
 		return windowHeight;
+	}
+
+	function get_devicePixelRatio() : Float {
+		return window.devicePixelRatio;
 	}
 
 	function get_mouseLock() : Bool {

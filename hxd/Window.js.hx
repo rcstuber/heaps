@@ -14,6 +14,8 @@ class Window {
 
 	public var width(get, never) : Int;
 	public var height(get, never) : Int;
+	public var devicePixelRatio(get, never) : Float;
+	
 	public var mouseX(get, never) : Int;
 	public var mouseY(get, never) : Int;
 	public var mouseLock(get, set) : Bool;
@@ -192,6 +194,10 @@ class Window {
 	public static function getInstance() : Window {
 		if( inst == null ) inst = new Window();
 		return inst;
+	}
+
+	inline function get_devicePixelRatio() : Float {
+		return getPixelRatio();
 	}
 
 	function getPixelRatio() {

@@ -289,7 +289,11 @@ class Engine {
 		if( height < 32 ) height = 32;
 		this.width = width;
 		this.height = height;
-		if( !driver.isDisposed() ) driver.resize(width, height);
+
+		var r = window.devicePixelRatio;
+		var sw = Std.int(width * r);
+		var sh = Std.int(height * r);
+		if( !driver.isDisposed() ) driver.resize(sw, sh);
 	}
 
 	public function begin() {

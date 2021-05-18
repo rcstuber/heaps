@@ -100,6 +100,8 @@ class System {
 		var size = haxe.macro.Compiler.getDefine("windowSize");
 		var title = haxe.macro.Compiler.getDefine("windowTitle");
 		var fixed = haxe.macro.Compiler.getDefine("windowFixed") == "1";
+		var hdpi = haxe.macro.Compiler.getDefine("hdpi") == "1";
+
 		if( title == null )
 			title = "";
 		if( size != null ) {
@@ -111,10 +113,10 @@ class System {
 		#if hlsdl
 			sdl.Sdl.init();
 			@:privateAccess Window.initChars();
-			@:privateAccess Window.inst = new Window(title, width, height, fixed);
+			@:privateAccess Window.inst = new Window(title, width, height, fixed, hdpi);
 			init();
 		#elseif hldx
-			@:privateAccess Window.inst = new Window(title, width, height, fixed);
+			@:privateAccess Window.inst = new Window(title, width, height, fixed, hdpi);
 			init();
 		#else
 			@:privateAccess Window.inst = new Window(title, width, height);
