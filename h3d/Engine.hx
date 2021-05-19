@@ -24,6 +24,7 @@ class Engine {
 	public var hardware(default, null) : Bool;
 	public var width(default, null) : Int;
 	public var height(default, null) : Int;
+	public var devicePixelRatio(get, never) : Float;
 	public var debug(default, set) : Bool;
 
 	public var drawTriangles(default, null) : Int;
@@ -287,13 +288,11 @@ class Engine {
 		// minimum 32x32 size
 		if( width < 32 ) width = 32;
 		if( height < 32 ) height = 32;
+
 		this.width = width;
 		this.height = height;
-
-		var r = window.devicePixelRatio;
-		var sw = Std.int(width * r);
-		var sh = Std.int(height * r);
-		if( !driver.isDisposed() ) driver.resize(sw, sh);
+		
+		if( !driver.isDisposed() ) driver.resize(Math.ceil(devicePixelRatio*width), Math.ceil(devicePixelRatio*height));
 	}
 
 	public function begin() {
@@ -433,6 +432,9 @@ class Engine {
 		window.removeResizeEvent(onWindowResize);
 	}
 
+	function get_devicePixelRatio() {
+		return window.devicePixelRatio;
+	}
 	function get_fps() {
 		return Math.ceil(realFps * 100) / 100;
 	}

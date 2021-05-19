@@ -476,8 +476,8 @@ class RenderContext extends h3d.impl.RenderContext {
 		renderY = y;
 		renderW = w;
 		renderH = h;
-		var scaleX = scene.viewportA * engine.width / 2;
-		var scaleY = scene.viewportD * engine.height / 2;
+		var scaleX = scene.viewportA * engine.devicePixelRatio * engine.width / 2;
+		var scaleY = scene.viewportD * engine.devicePixelRatio * engine.height / 2;
 		if( inFilter != null ) {
 			var fa = baseShader.filterMatrixA;
 			var fb = baseShader.filterMatrixB;
