@@ -196,7 +196,7 @@ class DirectXDriver extends h3d.impl.Driver {
 		hasDeviceError = true;
 	}
 
-	override function resize(width:Int, height:Int)  {
+	override function resize(width:Int, height:Int, scale:Float)  {
 		if( defaultDepth != null ) {
 			defaultDepth.view.release();
 			defaultDepth.res.release();

@@ -132,6 +132,8 @@ class GlDriver extends Driver {
 	var drawMode : Int;
 	var isIntelGpu : Bool;
 
+	var viewportScale : Float = 1.0;
+
 	static var BLACK = new h3d.Vector(0,0,0,0);
 
 	/**
@@ -780,7 +782,7 @@ class GlDriver extends Driver {
 		if( curTarget != null ) curTarget.flags.set(WasCleared);
 	}
 
-	override function resize(width, height) {
+	override function resize(width, height, scale) {
 		#if js
 		// prevent infinite grow if pixelRatio != 1
 		if( canvas.style.width == "" ) {
@@ -792,7 +794,9 @@ class GlDriver extends Driver {
 		#end
 		bufferWidth = width;
 		bufferHeight = height;
-		gl.viewport(0, 0, width, height);
+		viewportScale = scale;
+
+		gl.viewport(0, 0, Math.ceil(scale * width), Math.ceil(scale * height));
 
 		@:privateAccess if( defaultDepth != null ) {
 			disposeDepthBuffer(defaultDepth);
@@ -1504,7 +1508,7 @@ class GlDriver extends Driver {
 		curTarget = tex;
 		if( tex == null ) {
 			gl.bindFramebuffer(GL.FRAMEBUFFER, null);
-			gl.viewport(0, 0, bufferWidth, bufferHeight);
+			gl.viewport(0, 0, Math.ceil(viewportScale * bufferWidth), Math.ceil(viewportScale * bufferHeight));
 			return;
 		}
 

@@ -114,7 +114,7 @@ class Renderer extends hxd.impl.AnyProps {
 	}
 
 	inline function allocTarget( name : String, depth = true, size = 1., ?format ) {
-		return ctx.textures.allocTarget(name, Math.round(ctx.engine.width * size), Math.round(ctx.engine.height * size), depth, format);
+		return ctx.textures.allocTarget(name, Math.round(ctx.engine.devicePixelRatio * ctx.engine.width * size), Math.round(ctx.engine.devicePixelRatio * ctx.engine.height * size), depth, format);
 	}
 
 	function copy( from, to, ?blend ) {

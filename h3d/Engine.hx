@@ -284,7 +284,7 @@ class Engine {
 	public dynamic function onResized() {
 	}
 
-	public function resize(width, height) {
+	public function resize(width, height, scale:Float = 1.0) {
 		// minimum 32x32 size
 		if( width < 32 ) width = 32;
 		if( height < 32 ) height = 32;
@@ -292,7 +292,7 @@ class Engine {
 		this.width = width;
 		this.height = height;
 		
-		if( !driver.isDisposed() ) driver.resize(Math.ceil(devicePixelRatio*width), Math.ceil(devicePixelRatio*height));
+		if( !driver.isDisposed() ) driver.resize(Math.ceil(devicePixelRatio*width), Math.ceil(devicePixelRatio*height), scale);
 	}
 
 	public function begin() {
