@@ -229,6 +229,9 @@ class Driver {
 	public function setRenderZone( x : Int, y : Int, width : Int, height : Int ) {
 	}
 
+	public function setRenderViewport( x : Int, y : Int, width : Int, height : Int ) {
+	}
+
 	public function setRenderTarget( tex : Null<h3d.mat.Texture>, layer = 0, mipLevel = 0 ) {
 	}
 

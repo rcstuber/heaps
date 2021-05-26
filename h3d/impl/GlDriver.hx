@@ -1433,6 +1433,14 @@ class GlDriver extends Driver {
 		}
 	}
 
+	override public function setRenderViewport( x : Int, y : Int, width : Int, height : Int ) {
+		if( width < 0 )
+			width = bufferWidth;
+		if( height < 0 )
+			height = bufferHeight;
+		gl.viewport(Math.ceil(x*viewportScale), Math.ceil(y*viewportScale), Math.ceil(viewportScale * width), Math.ceil(viewportScale * height));
+	}
+
 	function setDrawBuffers( k : Int ) {
 		#if js
 		if( glES >= 3 )
