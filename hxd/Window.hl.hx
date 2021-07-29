@@ -146,7 +146,11 @@ class Window {
 	}
 
 	function get_devicePixelRatio() : Float {
+		#if (hldx || hlsdl)
 		return window.devicePixelRatio;
+		#else
+		return 1;
+		#end
 	}
 
 	function get_mouseLock() : Bool {
